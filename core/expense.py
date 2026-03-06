@@ -31,7 +31,7 @@ class Expense:
         if not self.title:
             raise EmptyTitleError("El título no puede estar vacío")
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other):
         return (
             self.id == other.id
             and self.title == other.title
