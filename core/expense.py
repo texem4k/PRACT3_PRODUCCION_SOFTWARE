@@ -3,7 +3,7 @@ from datetime import date
 
 from core.domain_error import (
     InvalidAmountError,
-    InvalidExpenseDateError,
+    InvalidExpenseDateError, EmptyTitleError,
 )
 
 
@@ -27,3 +27,9 @@ class Expense:
             raise InvalidExpenseDateError(
                 "La fecha del gasto no puede ser posterior a hoy"
             )
+        if not self.title:
+            raise EmptyTitleError("El título no puede estar vacío")
+
+    def __eq__(self, other):
+        return self.id == other.id and self.title == other.title and self.amount == other.amount \
+            and self.description == other.description
