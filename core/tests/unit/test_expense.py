@@ -1,10 +1,11 @@
-
 import pytest
 from datetime import date, timedelta
 
 from core.expense import Expense
 from core.domain_error import (
-    EmptyTitleError, InvalidAmountError, InvalidExpenseDateError,
+    EmptyTitleError,
+    InvalidAmountError,
+    InvalidExpenseDateError,
 )
 
 
@@ -42,7 +43,6 @@ def test_negative_amount_raises_error():
         Expense(id=1, title="", amount=-5, description="", expense_date=date.today())
 
 
-
 def test_future_date_raises_error():
     """
     Prueba que al intentar crear un objeto Expense con un campo 'expense_date' posterior a la fecha actual
@@ -56,4 +56,10 @@ def test_future_date_raises_error():
     - Verificar si ya se encuentra implementada esta validación en la clase Expense.
     """
     with pytest.raises(InvalidExpenseDateError):
-        Expense(id=1, title="", amount=10, description="", expense_date=date.today()+timedelta(days=1))
+        Expense(
+            id=1,
+            title="",
+            amount=10,
+            description="",
+            expense_date=date.today() + timedelta(days=1),
+        )

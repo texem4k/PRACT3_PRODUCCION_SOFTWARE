@@ -94,8 +94,11 @@ def test_create_multiple_expenses_and_list():
     service.create_expense("Pan", 3, "Mercado", date.today())
     service.create_expense("Leche", 4, "Supermercado", date.today())
     expenselist = service.list_expenses()
-    assert len(expenselist) == 2 and expenselist[0].title == "Pan" and expenselist[1].title == "Leche"
-
+    assert (
+        len(expenselist) == 2
+        and expenselist[0].title == "Pan"
+        and expenselist[1].title == "Leche"
+    )
 
 
 def test_remove_expense_reduces_total():
@@ -117,7 +120,7 @@ def test_remove_expense_reduces_total():
 
     service.remove_expense(1)
 
-    assert len(service.list_expenses())==1 and service.total_amount()==4
+    assert len(service.list_expenses()) == 1 and service.total_amount() == 4
 
 
 def test_update_expense_partial_fields():
@@ -137,7 +140,11 @@ def test_update_expense_partial_fields():
     service.create_expense("Camiseta", 15, "Ropa", date.today())
     service.update_expense(1, None, 18)
 
-    assert service.list_expenses()[0].title == "Camiseta" and service.list_expenses()[0].description == "Ropa" and service.list_expenses()[0].amount == 18
+    assert (
+        service.list_expenses()[0].title == "Camiseta"
+        and service.list_expenses()[0].description == "Ropa"
+        and service.list_expenses()[0].amount == 18
+    )
 
 
 def test_total_amount_after_removal():
@@ -154,6 +161,6 @@ def test_total_amount_after_removal():
 
     service.create_expense("Cursos", 30, "", date.today())
     service.create_expense("Internet", 25, "", date.today())
-    assert service.total_amount()==55
+    assert service.total_amount() == 55
     service.remove_expense(1)
     assert service.total_amount() == 25

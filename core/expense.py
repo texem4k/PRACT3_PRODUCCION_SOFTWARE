@@ -3,7 +3,8 @@ from datetime import date
 
 from core.domain_error import (
     InvalidAmountError,
-    InvalidExpenseDateError, EmptyTitleError,
+    InvalidExpenseDateError,
+    EmptyTitleError,
 )
 
 
@@ -15,7 +16,7 @@ class Expense:
     description: str
     expense_date: date
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """
         FIXME: Revisen si falta algo que comprobar...
         """
@@ -30,6 +31,10 @@ class Expense:
         if not self.title:
             raise EmptyTitleError("El título no puede estar vacío")
 
-    def __eq__(self, other):
-        return self.id == other.id and self.title == other.title and self.amount == other.amount \
+    def __eq__(self, other) -> bool:
+        return (
+            self.id == other.id
+            and self.title == other.title
+            and self.amount == other.amount
             and self.description == other.description
+        )

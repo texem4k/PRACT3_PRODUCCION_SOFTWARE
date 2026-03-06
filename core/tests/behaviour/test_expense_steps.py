@@ -39,10 +39,17 @@ def remove_expense(context, expense_id):
     context["service"].remove_expense(expense_id)
 
 
-@when(parsers.parse("añado un gasto a fecha {expense_date} de {amount:d} euros llamado {title}"))
+@when(
+    parsers.parse(
+        "añado un gasto a fecha {expense_date} de {amount:d} euros llamado {title}"
+    )
+)
 def add_expense_with_date(context, expense_date, amount, title):
     context["Total por mes"].create_expense(
-        title=title, amount=amount, description="", expense_date=date.fromisoformat(expense_date)
+        title=title,
+        amount=amount,
+        description="",
+        expense_date=date.fromisoformat(expense_date),
     )
 
 
@@ -51,24 +58,29 @@ def check_total(context, total):
     assert context["service"].total_amount() == total
 
 
-@then(parsers.parse("el número de gastos de {date_expense} debe ser {expected_total:d}"))
+@then(
+    parsers.parse("el número de gastos de {date_expense} debe ser {expected_total:d}")
+)
 def count_month_expenses(context, date_expense, expected_total):
     total_actual = context["Total por mes"].list_expenses()
-    total=0
+    total = 0
     for expense in total_actual:
         if expense.expense_date.month == datetime.strptime(date_expense, "%Y-%m").month:
-            total+=1
+            total += 1
     assert total == expected_total
 
 
-
-@then(parsers.parse("el total de gastos del mes {date_expense} debe ser {expected_total:d} euros"))
+@then(
+    parsers.parse(
+        "el total de gastos del mes {date_expense} debe ser {expected_total:d} euros"
+    )
+)
 def check_total_month(context, date_expense, expected_total):
     total_actual = context["Total por mes"].list_expenses()
-    total=0
+    total = 0
     for expense in total_actual:
         if expense.expense_date.month == datetime.strptime(date_expense, "%Y-%m").month:
-            total+=expense.amount
+            total += expense.amount
     assert total == expected_total
 
 

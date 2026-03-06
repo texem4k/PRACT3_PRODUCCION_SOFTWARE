@@ -62,8 +62,7 @@ def test_get_by_id_returns_expense():
     repo.save(expense1)
     repo.save(expense2)
     target = repo.get_by_id(1)
-    assert target==expense1
-
+    assert target == expense1
 
 
 def test_get_by_id_returns_none_if_not_found():
