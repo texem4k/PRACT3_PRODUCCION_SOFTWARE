@@ -1,8 +1,6 @@
 from datetime import date
 
-from apps.streamlit.config import expense_service
-from core.domain_error import InvalidAmountError
-from core.expense_service import ExpenseService, ExpenseRepository
+from core.expense_service import ExpenseService
 from core.no_tocar.sqlite_expense_repository import SQLiteExpenseRepository
 
 

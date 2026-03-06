@@ -1,4 +1,3 @@
-from email.errors import InvalidDateDefect
 
 import pytest
 from datetime import date, timedelta
